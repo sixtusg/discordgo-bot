@@ -7,7 +7,6 @@ import(
   "fmt"
   "flag"
   "strings"
-
   "github.com/bwmarrin/discordgo"
 )
 
