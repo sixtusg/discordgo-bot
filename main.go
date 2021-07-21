@@ -48,7 +48,11 @@ func onMessage(s *discordgo.Session, m *discordgo.MessageCreate) {
 
   if strings.HasPrefix(m.Content, BotPrefix + "ping") {
     ping(s, m)
-  } else if strings.HasPrefix(m.Content, BotPrefix + "ban") {
+  }
+  if strings.HasPrefix(m.Content, BotPrefix + "ban") {
     ban(s, m)
+  }
+  if strings.HasPrefix(m.Content, BotPrefix + "help") {
+    help(s, m)
   }
 }
