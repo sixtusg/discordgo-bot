@@ -14,13 +14,13 @@ func ping(s *discordgo.Session, m *discordgo.MessageCreate) {
 func ban(s *discordgo.Session, m *discordgo.MessageCreate) {
   arg := strings.Fields(m.Content)
 
-  if len(arg) < 2 {
-    s.ChannelMessageSend(m.ChannelID, "Syntax: `" + BotPrefix + "ban [mention user] [duration in days]`")
+  if discordgo.PermissionBanMembers < 2 {
+    s.ChannelMessageSend(m.ChannelID, "You do not have permission to issue this command.")
     return
   }
 
-  if discordgo.PermissionBanMembers < 2 {
-    s.ChannelMessageSend(m.ChannelID, "You do not have permission to issue this command.")
+  if len(arg) < 2 {
+    s.ChannelMessageSend(m.ChannelID, "Syntax: `" + BotPrefix + "ban [mention user] [duration in days]`")
     return
   }
 

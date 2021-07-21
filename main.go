@@ -38,7 +38,7 @@ func main() {
 }
 
 func onReady(s *discordgo.Session, event *discordgo.Ready) {
-  s.UpdateGameStatus(Token + "help")
+  s.UpdateGameStatus(0, BotPrefix + "help")
 }
 
 func onMessage(s *discordgo.Session, m *discordgo.MessageCreate) {
