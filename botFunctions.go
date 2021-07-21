@@ -15,41 +15,41 @@ func ping(s *discordgo.Session, m *discordgo.MessageCreate) {
 }
 
 func ban(s *discordgo.Session, m *discordgo.MessageCreate) {
-  arg := strings.Fields(m.Content)
+  p, err := s.UserChannelPermissions(m.Author.ID, m.ChannelID)
 
-  if discordgo.PermissionBanMembers != 3 {
-    s.ChannelMessageSend(m.ChannelID, "You do not have permission to issue this command.")
-    return
-  } else if discordgo.PermissionBanMembers != 4 {
-    s.ChannelMessageSend(m.ChannelID, "You do not have permission to issue this command.")
-    return
+  if err != nil {
+    fmt.Println(err)
   }
 
-  if len(arg) < 2 {
-    s.ChannelMessageSend(m.ChannelID, "Syntax: `" + BotPrefix + "ban [mention user] [duration in days]`")
-    return
-  }
+  if p&discordgo.PermissionBanMembers == discordgo.PermissionBanMembers {
+    arg := strings.Fields(m.Content)
 
-  if arg[1] == "@everyone" {
-    s.ChannelMessageSend(m.ChannelID, "You can not issue this command with argument `@everyone`")
-    return
-  }
-
-  if strings.HasPrefix(arg[1], "<@!") {
-
-    id := getIDFromMention(arg[1])
-
-    days, err := strconv.Atoi(arg[2])
-
-    if err != nil {
-      fmt.Println(err)
+    if len(arg) < 2 {
+      s.ChannelMessageSend(m.ChannelID, "Syntax: `" + BotPrefix + "ban [mention user] [duration in days]`")
       return
     }
 
-    s.GuildBanCreate(m.GuildID, id, days)
-  } else {
-    s.ChannelMessageSend(m.ChannelID, "Syntax: `" + BotPrefix + "ban [mention user] [duration in days]`")
-  }
+    if arg[1] == "@everyone" {
+      s.ChannelMessageSend(m.ChannelID, "You can not issue this command with argument `@everyone`")
+      return
+    }
 
-  fmt.Println(discordgo.PermissionBanMembers)
+    if strings.HasPrefix(arg[1], "<@!") {
+
+      id := getIDFromMention(arg[1])
+
+      days, err := strconv.Atoi(arg[2])
+
+      if err != nil {
+        fmt.Println(err)
+        return
+      }
+
+      s.GuildBanCreate(m.GuildID, id, days)
+      } else {
+        s.ChannelMessageSend(m.ChannelID, "Syntax: `" + BotPrefix + "ban [mention user] [duration in days]`")
+      }
+  } else {
+    s.ChannelMessageSend(m.ChannelID, "You do not have permission to issue this command.")
+  }
 }
