@@ -50,3 +50,32 @@ func ban(s *discordgo.Session, m *discordgo.MessageCreate) {
     s.ChannelMessageSend(m.ChannelID, "You do not have permission to issue this command.")
   }
 }
+
+func kick(s *discordgo.Session, m *discordgo.MessageCreate) {
+  p, err := s.UserChannelPermissions(m.Author.ID, m.ChannelID)
+
+  if err != nil {
+    fmt.Println(err)
+  }
+
+  if p&discordgo.PermissionKickMembers == discordgo.PermissionKickMembers {
+    arg := strings.Fields(m.Content)
+
+    if len(arg) < 2 {
+      s.ChannelMessageSend(m.ChannelID, "Syntax: `" + BotPrefix + "kick [mention user]`")
+      return
+    }
+
+    if arg[1] == "@everyone" {
+      s.ChannelMessageSend(m.ChannelID, "You can not issue this command with argument `@everyone`")
+    }
+
+    if strings.HasPrefix(arg[1], "<@!") {
+      id := getIDFromMention(arg[1])
+
+      s.GuildMemberDelete(m.GuildID, id)
+    }
+  } else {
+    s.ChannelMessageSend(m.ChannelID, "You do not have permission to issue this command.")
+  }
+}

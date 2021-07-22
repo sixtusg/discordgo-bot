@@ -58,4 +58,7 @@ func onMessage(s *discordgo.Session, m *discordgo.MessageCreate) {
   if strings.HasPrefix(m.Content, BotPrefix + "ban") {
     ban(s, m)
   }
+  if strings.HasPrefix(m.Content, BotPrefix + "kick") {
+    kick(s, m)
+  }
 }
