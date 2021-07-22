@@ -33,7 +33,6 @@ func ban(s *discordgo.Session, m *discordgo.MessageCreate) {
     }
 
     if strings.HasPrefix(arg[1], "<@!") {
-
       id := getIDFromMention(arg[1])
 
       days, err := strconv.Atoi(arg[2])
