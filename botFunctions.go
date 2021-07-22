@@ -26,12 +26,10 @@ func ban(s *discordgo.Session, m *discordgo.MessageCreate) {
 
     if len(arg) < 2 {
       s.ChannelMessageSend(m.ChannelID, "Syntax: `" + BotPrefix + "ban [mention user] [duration in days]`")
-      return
     }
 
     if arg[1] == "@everyone" {
       s.ChannelMessageSend(m.ChannelID, "You can not issue this command with argument `@everyone`")
-      return
     }
 
     if strings.HasPrefix(arg[1], "<@!") {
@@ -42,7 +40,6 @@ func ban(s *discordgo.Session, m *discordgo.MessageCreate) {
 
       if err != nil {
         fmt.Println(err)
-        return
       }
 
       s.GuildBanCreate(m.GuildID, id, days)
