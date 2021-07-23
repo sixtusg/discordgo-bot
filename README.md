@@ -12,11 +12,12 @@ go . -t [YOUR_BOT_TOKEN_REPLACES_THIS_AND_THE_BRACKETS_TOO] -p [YOUR_PREFIX_OF_C
 The following is a list of goals for the bot. This list will change over time.
 ```
 General [x]
-  Embeds [X]
+--Embeds [X]
+
 Moderation []
-  Kick [x]
-  Ban [x]
-  Unban []
-  Mute []
-  Muted role creation []
+--Kick [x]
+--Ban [x]
+--Unban []
+--Mute []
+----Muted role creation []
   ```
