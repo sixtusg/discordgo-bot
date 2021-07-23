@@ -6,6 +6,8 @@ import(
   "fmt"
   "github.com/bwmarrin/discordgo"
 )
+
+//simple
 func help(s *discordgo.Session, m *discordgo.MessageCreate) {
     s.ChannelMessageSend(m.ChannelID, "Commands: `" + BotPrefix + "help, " + BotPrefix + "ping, " + BotPrefix + "ban" + "`") //note to self: this is horrendously ugly and must be fixed, especially when considering that it is likely the first command users will issue. in the future, add embeds and order in a hierarchal manner
 }
@@ -14,6 +16,7 @@ func ping(s *discordgo.Session, m *discordgo.MessageCreate) {
   genericEmbed("Pong!", "", s, m)
 }
 
+//moderation
 func ban(s *discordgo.Session, m *discordgo.MessageCreate) {
   p, err := s.UserChannelPermissions(m.Author.ID, m.ChannelID)
 
