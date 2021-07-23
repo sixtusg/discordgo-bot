@@ -27,7 +27,7 @@ func ban(s *discordgo.Session, m *discordgo.MessageCreate) {
   if p&discordgo.PermissionBanMembers == discordgo.PermissionBanMembers {
     arg := strings.Fields(m.Content)
 
-    if len(arg) < 2 {
+    if len(arg) < 3 {
       errEmbed("Syntax error", BotPrefix + "ban [mention user] [number of days]", s, m)
       return
     }
