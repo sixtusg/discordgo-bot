@@ -11,7 +11,7 @@ func help(s *discordgo.Session, m *discordgo.MessageCreate) {
 }
 
 func ping(s *discordgo.Session, m *discordgo.MessageCreate) {
-  s.ChannelMessageSend(m.ChannelID, "Pong!")
+  genericEmbed("Pong!", "", s, m)
 }
 
 func ban(s *discordgo.Session, m *discordgo.MessageCreate) {
@@ -25,11 +25,12 @@ func ban(s *discordgo.Session, m *discordgo.MessageCreate) {
     arg := strings.Fields(m.Content)
 
     if len(arg) < 2 {
-      s.ChannelMessageSend(m.ChannelID, "Syntax: `" + BotPrefix + "ban [mention user] [duration in days]`")
+      errEmbed("Syntax error", BotPrefix + "ban [mention user] [number of days]", s, m)
+      return
     }
 
     if arg[1] == "@everyone" {
-      s.ChannelMessageSend(m.ChannelID, "You can not issue this command with argument `@everyone`")
+      errEmbed("Syntax error", "You cannot issue this command with argument @everyone", s, m)
     }
 
     if strings.HasPrefix(arg[1], "<@!") {
@@ -43,10 +44,10 @@ func ban(s *discordgo.Session, m *discordgo.MessageCreate) {
 
       s.GuildBanCreate(m.GuildID, id, days)
       } else {
-        s.ChannelMessageSend(m.ChannelID, "Syntax: `" + BotPrefix + "ban [mention user] [duration in days]`")
+        errEmbed("Syntax error", BotPrefix + "ban [mention user] [number of days]", s, m)
       }
   } else {
-    s.ChannelMessageSend(m.ChannelID, "You do not have permission to issue this command.")
+    errEmbed("Error", "You do not have permission to issue this command.", s, m)
   }
 }
 
