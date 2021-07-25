@@ -20,8 +20,9 @@ This is subject to change.
   * Ban [x]
   * Unban [x]
   * Kick [x]
-  * Mute [x]
-    * Setting up roles for muting [x]
+  * Mute [ ]
+    * Setting up roles for muting [ ]
+    * Giving mute role [ ]
   * Clear messages [ ]
 
 * Fun [ ]
