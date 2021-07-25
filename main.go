@@ -10,15 +10,15 @@ import (
 var token string     //token used for logging in as client
 var botPrefix string //prefix which will be used for users to call commands
 
-func init() { //go run . -t [TOKEN] -p [PREFIX]
-	flag.StringVar(&Token, "t", "", "Bot token")
+func init() { //go run . -t [token] -p [PREFIX]
+	flag.StringVar(&token, "t", "", "Bot token")
 	flag.StringVar(&botPrefix, "p", "", "Bot prefix")
 
 	flag.Parse()
 }
 
 func main() {
-	d, err := discordgo.New("Bot " + Token)
+	d, err := discordgo.New("Bot " + token)
 	if err != nil {
 		fmt.Println(err)
 	}
