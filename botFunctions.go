@@ -82,7 +82,7 @@ func unban(s *discordgo.Session, m *discordgo.MessageCreate) {
       errEmbed("Syntax error", BotPrefix + "unban [mention user]", s, m)
     }
   } else {
-    errEmbed("Error", "You do not have permission to issue t his command.", s, m)
+    errEmbed("Error", "You do not have permission to issue this command.", s, m)
   }
 }
 
@@ -97,12 +97,12 @@ func kick(s *discordgo.Session, m *discordgo.MessageCreate) {
     arg := strings.Fields(m.Content)
 
     if len(arg) < 2 {
-      s.ChannelMessageSend(m.ChannelID, "Syntax: `" + BotPrefix + "kick [mention user]`")
+      errEmbed("Syntax error", BotPrefix + "kick [mention user]", s, m)
       return
     }
 
     if arg[1] == "@everyone" {
-      s.ChannelMessageSend(m.ChannelID, "You can not issue this command with argument `@everyone`")
+      errEmbed("Syntax error", "You cannot issue this command with argument @everyone", s, m)
     }
 
     if strings.HasPrefix(arg[1], "<@!") {
@@ -111,6 +111,6 @@ func kick(s *discordgo.Session, m *discordgo.MessageCreate) {
       s.GuildMemberDelete(m.GuildID, id)
     }
   } else {
-    s.ChannelMessageSend(m.ChannelID, "You do not have permission to issue this command.")
+    errEmbed("Error", "You do not have permission to issue this command.", s, m)
   }
 }
