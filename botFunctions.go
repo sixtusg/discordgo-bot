@@ -65,6 +65,7 @@ func ban(s *discordgo.Session, m *discordgo.MessageCreate) { //spaghetti functio
 			}
 
 			s.GuildBanCreate(m.GuildID, id, days)
+			successEmbed("Success", "User successfully banned.", s, m)
 		} else {
 			errEmbed("Syntax error", botPrefix+"ban [mention user] [number of days]", s, m)
 		}
@@ -102,6 +103,7 @@ func unban(s *discordgo.Session, m *discordgo.MessageCreate) {
 			id := getIDFromMention(arg[1])
 
 			s.GuildBanDelete(m.GuildID, id)
+			successEmbed("Success", "User successfully unbanned.", s, m)
 		} else {
 			errEmbed("Syntax error", botPrefix+"unban [mention user]", s, m)
 		}
@@ -137,6 +139,7 @@ func kick(s *discordgo.Session, m *discordgo.MessageCreate) {
 			id := getIDFromMention(arg[1])
 
 			s.GuildMemberDelete(m.GuildID, id)
+			successEmbed("Success", "User successfully kicked.", s, m)
 		} else {
 			errEmbed("Syntax error", botPrefix+"unban [mention user]", s, m)
 		}
