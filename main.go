@@ -30,15 +30,17 @@ func main() {
   d.AddHandler(onMessage)
 
   d.Open()
-  fmt.Println("Bot is now running")
 
   fmt.Scanln() //Many advise against using fmt.Scanln() to keep the client open, but I do not know why so I will use it.
 
   d.Close()
 }
 
-func onReady(s *discordgo.Session, event *discordgo.Ready) {
+func onReady(s *discordgo.Session, e *discordgo.Ready) {
   s.UpdateGameStatus(0, BotPrefix + "help")
+  fmt.Println("Bot is now running")
+  fmt.Println("Logged in as " + e.User.String())
+
 }
 
 func onMessage(s *discordgo.Session, m *discordgo.MessageCreate) {
@@ -47,7 +49,7 @@ func onMessage(s *discordgo.Session, m *discordgo.MessageCreate) {
 	}
 
   //simple
-  if strings.HasPrefix(m.Content, BotPrefix + "ping") {
+  if strings.HasPrefix(m.Content, BotPrefix + "ping") || strings.HasPrefix(m.Content, BotPrefix + "pong") {
     ping(s, m)
   }
   if strings.HasPrefix(m.Content, BotPrefix + "help") {

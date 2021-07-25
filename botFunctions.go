@@ -14,6 +14,7 @@ func help(s *discordgo.Session, m *discordgo.MessageCreate) {
 
 func ping(s *discordgo.Session, m *discordgo.MessageCreate) {
   genericEmbed("Pong!", "", s, m)
+  fmt.Println(s.HeartbeatLatency())
 }
 
 //moderation
