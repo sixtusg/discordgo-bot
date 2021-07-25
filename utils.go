@@ -25,8 +25,9 @@ func errEmbed(title string, description string, s *discordgo.Session, m *discord
 }
 
 func successEmbed(title string, description string, s *discordgo.Session, m *discordgo.MessageCreate) {
-	msgEmb :=  &discordgo.MessageEmbed{}
+	msgEmb := &discordgo.MessageEmbed{}
 	msgEmb.Title = title
 	msgEmb.Description = description
 	msgEmb.Color = 0x00ff00
+	s.ChannelMessageSendEmbed(m.ChannelID, msgEmb)
 }
