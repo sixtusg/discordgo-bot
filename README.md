@@ -1,6 +1,6 @@
 [![Go Report Card](https://goreportcard.com/badge/github.com/sixtusg/discordgo-bot)](https://goreportcard.com/report/github.com/sixtusg/discordgo-bot)
-[![made-with-Go](https://img.shields.io/badge/Made%20with-Go-1f425f.svg)](http://golang.org)
 [![Maintainability](https://api.codeclimate.com/v1/badges/6a6888d64397168c65b1/maintainability)](https://codeclimate.com/github/sixtusg/sixtus-discord-bot/maintainability)
+[![made-with-Go](https://img.shields.io/badge/Made%20with-Go-1f425f.svg)](http://golang.org)
 [![GitHub license](https://img.shields.io/github/license/sixtusg/discordgo-bot)](https://github.com/sixtusg/discordgo-bot/blob/main/LICENSE)
 
 # sixtus-discord-bot
