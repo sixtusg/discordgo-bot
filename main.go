@@ -36,10 +36,11 @@ func main() {
   d.Close()
 }
 
-func onReady(s *discordgo.Session, e *discordgo.Ready) {
+func onReady(s *discordgo.Session, r *discordgo.Ready) {
   s.UpdateGameStatus(0, BotPrefix + "help")
   fmt.Println("Bot is now running")
-  fmt.Println("Logged in as " + e.User.String())
+  fmt.Println("Logged in as: " + r.User.String())
+  fmt.Println("Session ID: " + r.SessionID)
 
 }
 
