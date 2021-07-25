@@ -1,23 +1,27 @@
-# discordgo-bot
+[![Go Report Card](https://goreportcard.com/badge/github.com/sixtusg/discordgo-bot)](https://goreportcard.com/report/github.com/sixtusg/discordgo-bot)
+[![made-with-Go](https://img.shields.io/badge/Made%20with-Go-1f425f.svg)](http://golang.org)
+[![GitHub license](https://img.shields.io/github/license/sixtusg/discordgo-bot)](https://github.com/sixtusg/discordgo-bot/blob/main/LICENSE)
+
+#sixtus-discord-bot
 Creating a Discord bot using Discord's API and the DiscordGo library for general use in guilds.
 
-## Usage
-(This assumes you already have a working Go environment setup and that it is correctly installed on your system.)
-In your `./discordgo-bot` directory run:
-```
-go . -t [YOUR_BOT_TOKEN_REPLACES_THIS_AND_THE_BRACKETS_TOO] -p [YOUR_PREFIX_OF_CHOICE]
-```
+##Usage
+Run `./main -t [TOKEN_GOES_HERE] -p [PREFIX_GOES HERE]`
+(Note that this is for usage in packages.)
 
-## Goals
-The following is a list of goals for the bot. This list will change over time.
-```
-General [x]
---Embeds [X]
+##Goals
+This is subject to change.
+* Simple [x]
+  * Help [x]
+  * Ping [x]
 
-Moderation []
---Kick [x]
---Ban [x]
---Unban []
---Mute []
-----Muted role creation []
-  ```
+* Moderation []
+  * Ban [x]
+  * Unban [x]
+  * Kick [x]
+  * Mute [x]
+    * Setting up roles for muting [x]
+  * Clear messages []
+
+* Fun []
+  * Reddit support []
