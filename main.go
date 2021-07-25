@@ -1,3 +1,5 @@
+package main
+
 import (
 	"flag"
 	"fmt"
@@ -10,7 +12,7 @@ var botPrefix string //prefix which will be used for users to call commands
 
 func init() { //go run . -t [TOKEN] -p [PREFIX]
 	flag.StringVar(&Token, "t", "", "Bot token")
-	flag.StringVar(&BotPrefix, "p", "", "Bot prefix")
+	flag.StringVar(&botPrefix, "p", "", "Bot prefix")
 
 	flag.Parse()
 }
@@ -32,7 +34,7 @@ func main() {
 }
 
 func onReady(s *discordgo.Session, r *discordgo.Ready) {
-	s.UpdateGameStatus(0, BotPrefix+"help")
+	s.UpdateGameStatus(0, botPrefix+"help")
 	fmt.Println("Bot is now running")
 	fmt.Println("Logged in as: " + r.User.String())
 	fmt.Println("Session ID: " + r.SessionID)
@@ -45,21 +47,21 @@ func onMessage(s *discordgo.Session, m *discordgo.MessageCreate) {
 	}
 
 	//simple
-	if strings.HasPrefix(m.Content, BotPrefix+"ping") || strings.HasPrefix(m.Content, BotPrefix+"pong") {
+	if strings.HasPrefix(m.Content, botPrefix+"ping") || strings.HasPrefix(m.Content, botPrefix+"pong") {
 		ping(s, m)
 	}
-	if strings.HasPrefix(m.Content, BotPrefix+"help") {
+	if strings.HasPrefix(m.Content, botPrefix+"help") {
 		help(s, m)
 	}
 
 	//moderation
-	if strings.HasPrefix(m.Content, BotPrefix+"ban") {
+	if strings.HasPrefix(m.Content, botPrefix+"ban") {
 		ban(s, m)
 	}
-	if strings.HasPrefix(m.Content, BotPrefix+"unban") {
+	if strings.HasPrefix(m.Content, botPrefix+"unban") {
 		unban(s, m)
 	}
-	if strings.HasPrefix(m.Content, BotPrefix+"kick") {
+	if strings.HasPrefix(m.Content, botPrefix+"kick") {
 		kick(s, m)
 	}
 }

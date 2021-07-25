@@ -12,9 +12,9 @@ func help(s *discordgo.Session, m *discordgo.MessageCreate) {
 	//if this isn't the most tedious thing i've ever done...
 	//is there any way to not make this code ugly?
 	//yours truly, past Sixtus
-	banHelp := "**Ban**\n`" + BotPrefix + "ban help`\n\n"
-	unbanHelp := "**Unban**\n`" + BotPrefix + "unban help`\n\n"
-	kickHelp := "**Kick**\n`" + BotPrefix + "kick help`\n\n"
+	banHelp := "**Ban**\n`" + botPrefix + "ban help`\n\n"
+	unbanHelp := "**Unban**\n`" + botPrefix + "unban help`\n\n"
+	kickHelp := "**Kick**\n`" + botPrefix + "kick help`\n\n"
 
 	genericEmbed("Commands", banHelp+unbanHelp+kickHelp, s, m)
 }
@@ -36,7 +36,7 @@ func ban(s *discordgo.Session, m *discordgo.MessageCreate) { //spaghetti functio
 		arg := strings.Fields(m.Content)
 
 		if len(arg) < 2 {
-			errEmbed("Syntax error", BotPrefix+"ban [mention user] [number of days]", s, m)
+			errEmbed("Syntax error", botPrefix+"ban [mention user] [number of days]", s, m)
 			return
 		}
 
@@ -46,12 +46,12 @@ func ban(s *discordgo.Session, m *discordgo.MessageCreate) { //spaghetti functio
 		}
 
 		if arg[1] == "help" {
-			genericEmbed("Help", "Use this command to ban a user\n\n**Usage**\n`"+BotPrefix+"ban [mention user] [number of days for user to be banned]`", s, m)
+			genericEmbed("Help", "Use this command to ban a user\n\n**Usage**\n`"+botPrefix+"ban [mention user] [number of days for user to be banned]`", s, m)
 			return
 		}
 
 		if len(arg) < 3 {
-			errEmbed("Syntax error", BotPrefix+"ban [mention user] [number of days]", s, m)
+			errEmbed("Syntax error", botPrefix+"ban [mention user] [number of days]", s, m)
 			return
 		}
 
@@ -66,7 +66,7 @@ func ban(s *discordgo.Session, m *discordgo.MessageCreate) { //spaghetti functio
 
 			s.GuildBanCreate(m.GuildID, id, days)
 		} else {
-			errEmbed("Syntax error", BotPrefix+"ban [mention user] [number of days]", s, m)
+			errEmbed("Syntax error", botPrefix+"ban [mention user] [number of days]", s, m)
 		}
 	} else {
 		errEmbed("Error", "You do not have permission to issue this command.", s, m)
@@ -84,7 +84,7 @@ func unban(s *discordgo.Session, m *discordgo.MessageCreate) {
 		arg := strings.Fields(m.Content)
 
 		if len(arg) < 2 {
-			errEmbed("Syntax error", BotPrefix+"unban [mention user]", s, m)
+			errEmbed("Syntax error", botPrefix+"unban [mention user]", s, m)
 			return
 		}
 
@@ -94,7 +94,7 @@ func unban(s *discordgo.Session, m *discordgo.MessageCreate) {
 		}
 
 		if arg[1] == "help" {
-			genericEmbed("Help", "Use this command to unban a user\n\n**Usage**\n`"+BotPrefix+"unban <@![user id]`", s, m)
+			genericEmbed("Help", "Use this command to unban a user\n\n**Usage**\n`"+botPrefix+"unban <@![user id]`", s, m)
 			return
 		}
 
@@ -103,7 +103,7 @@ func unban(s *discordgo.Session, m *discordgo.MessageCreate) {
 
 			s.GuildBanDelete(m.GuildID, id)
 		} else {
-			errEmbed("Syntax error", BotPrefix+"unban [mention user]", s, m)
+			errEmbed("Syntax error", botPrefix+"unban [mention user]", s, m)
 		}
 	} else {
 		errEmbed("Error", "You do not have permission to issue this command.", s, m)
@@ -121,7 +121,7 @@ func kick(s *discordgo.Session, m *discordgo.MessageCreate) {
 		arg := strings.Fields(m.Content)
 
 		if len(arg) < 2 {
-			errEmbed("Syntax error", BotPrefix+"kick [mention user]", s, m)
+			errEmbed("Syntax error", botPrefix+"kick [mention user]", s, m)
 			return
 		}
 
@@ -130,7 +130,7 @@ func kick(s *discordgo.Session, m *discordgo.MessageCreate) {
 		}
 
 		if arg[1] == "help" {
-			genericEmbed("Help", "Use this command to kick a user\n\n**Usage**\n`"+BotPrefix+"kick [mention a user]`", s, m)
+			genericEmbed("Help", "Use this command to kick a user\n\n**Usage**\n`"+botPrefix+"kick [mention a user]`", s, m)
 		}
 
 		if strings.HasPrefix(arg[1], "<@!") {
@@ -138,7 +138,7 @@ func kick(s *discordgo.Session, m *discordgo.MessageCreate) {
 
 			s.GuildMemberDelete(m.GuildID, id)
 		} else {
-			errEmbed("Syntax error", BotPrefix+"unban [mention user]", s, m)
+			errEmbed("Syntax error", botPrefix+"unban [mention user]", s, m)
 		}
 	} else {
 		errEmbed("Error", "You do not have permission to issue this command.", s, m)
