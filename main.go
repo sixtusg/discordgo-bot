@@ -10,8 +10,8 @@ import(
   "github.com/bwmarrin/discordgo"
 )
 
-var Token string
-var BotPrefix string
+var Token string //token used for logging in as client
+var BotPrefix string //prefix which will be used for users to call commands
 
 func init() { //go run . -t [TOKEN] -p [PREFIX]
   flag.StringVar(&Token, "t", "", "Bot token")
