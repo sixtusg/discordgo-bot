@@ -148,3 +148,20 @@ func kick(s *discordgo.Session, m *discordgo.MessageCreate) {
 		errEmbed("Error", "You do not have permission to issue this command.", s, m)
 	}
 }
+
+func setup(s *discordgo.Session, m *discordgo.MessageCreate) {
+	p, err := s.UserChannelPermissions(m.Author.ID, m.ChannelID)
+
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	if p&discordgo.PermissionManageRoles == discordgo.PermissionManageRoles {
+
+		role, err := s.GuildRoleCreate(m.GuildID)
+
+		fmt.Println(err)
+
+		s.GuildRoleEdit(m.GuildID, role.ID, "Muted", 0x646464, false, 1024, false)
+	}
+}
