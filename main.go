@@ -3,8 +3,9 @@ package main
 import (
 	"flag"
 	"fmt"
-	"github.com/bwmarrin/discordgo"
 	"strings"
+
+	"github.com/bwmarrin/discordgo"
 )
 
 var token string     //token used for logging in as client

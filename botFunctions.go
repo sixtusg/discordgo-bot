@@ -2,9 +2,10 @@ package main
 
 import (
 	"fmt"
-	"github.com/bwmarrin/discordgo"
 	"strconv"
 	"strings"
+
+	"github.com/bwmarrin/discordgo"
 )
 
 //simple
