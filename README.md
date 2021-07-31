@@ -12,16 +12,16 @@ Run `./main -t [TOKEN_GOES_HERE] -p [PREFIX_GOES HERE]`
 
 ## Goals
 This is subject to change.
-* Simple [x]
+* Simple [ ]
   * Help [x]
-  * Ping [x]
+  * Ping [ ]
     * Show delay for command to process in ping [ ]
 
 * Moderation [ ]
   * Ban [x]
   * Unban [x]
   * Kick [x]
-  * Mute [x]
+  * Mute [ ]
     * Setting up roles for muting [x]
     * Giving mute role [x]
     * Removing mute role [ ]
