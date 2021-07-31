@@ -1,6 +1,8 @@
 package main
 
 import (
+	"fmt"
+
 	"github.com/bwmarrin/discordgo"
 )
 
@@ -30,4 +32,18 @@ func successEmbed(title string, description string, s *discordgo.Session, m *dis
 	msgEmb.Description = description
 	msgEmb.Color = 0x00ff00
 	s.ChannelMessageSendEmbed(m.ChannelID, msgEmb)
+}
+
+func getRoleIDFromMutedRole(s *discordgo.Session, m *discordgo.MessageCreate) string {
+	guildInfo, err := s.Guild(m.GuildID)
+
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	for _, v := range guildInfo.Roles {
+		if v.Name == "Muted" {
+			return v.ID
+		}
+	}
 }
