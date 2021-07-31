@@ -68,4 +68,7 @@ func onMessage(s *discordgo.Session, m *discordgo.MessageCreate) {
 	if strings.HasPrefix(m.Content, botPrefix+"setup") {
 		setup(s, m)
 	}
+	if strings.HasPrefix(m.Content, botPrefix+"mute") {
+		mute(s, m)
+	}
 }

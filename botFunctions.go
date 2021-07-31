@@ -182,3 +182,46 @@ func setup(s *discordgo.Session, m *discordgo.MessageCreate) {
 		errEmbed("Error", "You do not have permission to issue this command.", s, m)
 	}
 }
+
+func mute(s *discordgo.Session, m *discordgo.MessageCreate) {
+	p, err := s.UserChannelPermissions(m.Author.ID, m.ChannelID)
+
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	if p&discordgo.PermissionManageRoles == discordgo.PermissionManageRoles {
+		arg := strings.Fields(m.Content)
+
+		if len(arg) < 2 {
+			errEmbed("Syntax error", "`"+botPrefix+"mute [mention user]", s, m)
+			return
+		}
+
+		if arg[1] == "@everyone" {
+			errEmbed("Syntax error", "You cannot issue this command with argument @everyone", s, m)
+			return
+		}
+
+		if arg[1] == "help" {
+			genericEmbed("Help", "Use this command to mute a user\n\n**Usage**\n`"+botPrefix+"mute [mention user]`", s, m)
+			return
+		}
+
+		if strings.HasPrefix(arg[1], "<@!") {
+			id := getIDFromMention(arg[1])
+
+			if getRoleIDFromMutedRole(s, m) == "" {
+				errEmbed("Error", "You do have not run the `"+botPrefix+"setup` command yet. Muted role cannot be added", s, m)
+				return
+			}
+
+			s.GuildMemberRoleAdd(m.GuildID, id, getRoleIDFromMutedRole(s, m))
+		} else {
+			errEmbed("Syntax error", botPrefix+"mute [mention user]", s, m)
+		}
+
+	} else {
+		errEmbed("Error", "You do not have permission to issue this command.", s, m)
+	}
+}
