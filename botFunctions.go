@@ -157,11 +157,36 @@ func setup(s *discordgo.Session, m *discordgo.MessageCreate) {
 	}
 
 	if p&discordgo.PermissionManageRoles == discordgo.PermissionManageRoles {
+		arg := strings.Fields(m.Content)
+
+		if len(arg) > 1 {
+			if arg[1] == "help" {
+				genericEmbed("Help", "Use this command to create a muted role for muting users\n\n**Usage**\n`"+botPrefix+"setup`", s, m)
+				return
+			}
+		}
 
 		role, err := s.GuildRoleCreate(m.GuildID)
 
-		fmt.Println(err)
+		if err != nil {
+			fmt.Println(err)
+		}
+
+		guildInfo, err := s.Guild(m.GuildID)
+
+		if err != nil {
+			fmt.Println(err)
+		}
+
+		for _, v := range guildInfo.Roles {
+			if v.Name == "Muted" {
+				s.GuildRoleDelete(m.GuildID, v.ID)
+			}
+		}
 
 		s.GuildRoleEdit(m.GuildID, role.ID, "Muted", 0x646464, false, 1024, false)
+		successEmbed("Success", "Muted role successfuly created.", s, m)
+	} else {
+		errEmbed("Error", "You do not have permission to issue this command.", s, m)
 	}
 }
