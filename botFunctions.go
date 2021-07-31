@@ -57,7 +57,6 @@ func ban(s *discordgo.Session, m *discordgo.MessageCreate) { //spaghetti functio
 		}
 
 		if strings.HasPrefix(arg[1], "<@!") {
-			id := getIDFromMention(arg[1])
 
 			days, err := strconv.Atoi(arg[2])
 
@@ -65,7 +64,7 @@ func ban(s *discordgo.Session, m *discordgo.MessageCreate) { //spaghetti functio
 				fmt.Println(err)
 			}
 
-			s.GuildBanCreate(m.GuildID, id, days)
+			s.GuildBanCreate(m.GuildID, getIDFromMention(arg[1]), days)
 			successEmbed("Success", "User successfully banned.", s, m)
 		} else {
 			errEmbed("Syntax error", botPrefix+"ban [mention user] [number of days]", s, m)
@@ -101,9 +100,8 @@ func unban(s *discordgo.Session, m *discordgo.MessageCreate) {
 		}
 
 		if strings.HasPrefix(arg[1], "<@!") {
-			id := getIDFromMention(arg[1])
 
-			s.GuildBanDelete(m.GuildID, id)
+			s.GuildBanDelete(m.GuildID, getIDFromMention(arg[1]))
 			successEmbed("Success", "User successfully unbanned.", s, m)
 		} else {
 			errEmbed("Syntax error", botPrefix+"unban [mention user]", s, m)
@@ -137,9 +135,8 @@ func kick(s *discordgo.Session, m *discordgo.MessageCreate) {
 		}
 
 		if strings.HasPrefix(arg[1], "<@!") {
-			id := getIDFromMention(arg[1])
 
-			s.GuildMemberDelete(m.GuildID, id)
+			s.GuildMemberDelete(m.GuildID, getIDFromMention(arg[1]))
 			successEmbed("Success", "User successfully kicked.", s, m)
 		} else {
 			errEmbed("Syntax error", botPrefix+"unban [mention user]", s, m)
@@ -209,14 +206,13 @@ func mute(s *discordgo.Session, m *discordgo.MessageCreate) {
 		}
 
 		if strings.HasPrefix(arg[1], "<@!") {
-			id := getIDFromMention(arg[1])
 
 			if getRoleIDFromMutedRole(s, m) == "" {
 				errEmbed("Error", "You do have not run the `"+botPrefix+"setup` command yet. Muted role cannot be added", s, m)
 				return
 			}
 
-			s.GuildMemberRoleAdd(m.GuildID, id, getRoleIDFromMutedRole(s, m))
+			s.GuildMemberRoleAdd(m.GuildID, getIDFromMention(arg[1]), getRoleIDFromMutedRole(s, m))
 		} else {
 			errEmbed("Syntax error", botPrefix+"mute [mention user]", s, m)
 		}
