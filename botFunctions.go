@@ -172,16 +172,8 @@ func setup(s *discordgo.Session, m *discordgo.MessageCreate) {
 			fmt.Println(err)
 		}
 
-		guildInfo, err := s.Guild(m.GuildID)
-
-		if err != nil {
-			fmt.Println(err)
-		}
-
-		for _, v := range guildInfo.Roles {
-			if v.Name == "Muted" {
-				s.GuildRoleDelete(m.GuildID, v.ID)
-			}
+		if getRoleIDFromMutedRole(s, m) != "" {
+			s.GuildRoleDelete(m.GuildID, getRoleIDFromMutedRole(s, m))
 		}
 
 		s.GuildRoleEdit(m.GuildID, role.ID, "Muted", 0x646464, false, 1024, false)

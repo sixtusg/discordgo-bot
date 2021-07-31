@@ -46,4 +46,5 @@ func getRoleIDFromMutedRole(s *discordgo.Session, m *discordgo.MessageCreate) st
 			return v.ID
 		}
 	}
+	return ""
 }
