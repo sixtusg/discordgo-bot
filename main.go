@@ -71,4 +71,7 @@ func onMessage(s *discordgo.Session, m *discordgo.MessageCreate) {
 	if strings.HasPrefix(m.Content, botPrefix+"mute") {
 		mute(s, m)
 	}
+	if strings.HasPrefix(m.Content, botPrefix+"unmute") {
+		unmute(s, m)
+	}
 }
