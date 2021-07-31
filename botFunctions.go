@@ -16,8 +16,11 @@ func help(s *discordgo.Session, m *discordgo.MessageCreate) {
 	banHelp := "**Ban**\n`" + botPrefix + "ban help`\n\n"
 	unbanHelp := "**Unban**\n`" + botPrefix + "unban help`\n\n"
 	kickHelp := "**Kick**\n`" + botPrefix + "kick help`\n\n"
+	setupHelp := "**Setup**\n`" + botPrefix + "setup help`\n\n"
+	muteHelp := "**Mute**\n`" + botPrefix + "mute help`\n\n"
+	unmuteHelp := "**Unmute**\n`" + botPrefix + "unmute help`\n\n"
 
-	genericEmbed("Commands", banHelp+unbanHelp+kickHelp, s, m)
+	genericEmbed("Commands", banHelp+unbanHelp+kickHelp+setupHelp+muteHelp+unmuteHelp, s, m)
 }
 
 func ping(s *discordgo.Session, m *discordgo.MessageCreate) {
