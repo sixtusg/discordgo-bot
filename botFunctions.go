@@ -24,8 +24,8 @@ func help(s *discordgo.Session, m *discordgo.MessageCreate) {
 }
 
 func ping(s *discordgo.Session, m *discordgo.MessageCreate) {
-	genericEmbed("Pong!", "", s, m)
-	fmt.Println(s.HeartbeatLatency())
+	delay := string(rune(s.HeartbeatLatency()))
+	genericEmbed("Pong!", delay, s, m)
 }
 
 //moderation
@@ -40,7 +40,7 @@ func ban(s *discordgo.Session, m *discordgo.MessageCreate) { //spaghetti functio
 		arg := strings.Fields(m.Content)
 
 		if len(arg) < 2 {
-			errEmbed("Syntax error", botPrefix+"ban [mention user] [number of days]", s, m)
+			errEmbed("Syntax error", "`"+botPrefix+"ban [mention user] [number of days]`", s, m)
 			return
 		}
 
@@ -55,7 +55,7 @@ func ban(s *discordgo.Session, m *discordgo.MessageCreate) { //spaghetti functio
 		}
 
 		if len(arg) < 3 {
-			errEmbed("Syntax error", botPrefix+"ban [mention user] [number of days]", s, m)
+			errEmbed("Syntax error", "`"+botPrefix+"ban [mention user] [number of days]`", s, m)
 			return
 		}
 
@@ -70,7 +70,7 @@ func ban(s *discordgo.Session, m *discordgo.MessageCreate) { //spaghetti functio
 			s.GuildBanCreate(m.GuildID, getIDFromMention(arg[1]), days)
 			successEmbed("Success", "User successfully banned.", s, m)
 		} else {
-			errEmbed("Syntax error", botPrefix+"ban [mention user] [number of days]", s, m)
+			errEmbed("Syntax error", "`"+botPrefix+"ban [mention user] [number of days]`", s, m)
 		}
 	} else {
 		errEmbed("Error", "You do not have permission to issue this command.", s, m)
@@ -88,7 +88,7 @@ func unban(s *discordgo.Session, m *discordgo.MessageCreate) {
 		arg := strings.Fields(m.Content)
 
 		if len(arg) < 2 {
-			errEmbed("Syntax error", botPrefix+"unban [mention user]", s, m)
+			errEmbed("Syntax error", "`"+botPrefix+"unban [mention user]`", s, m)
 			return
 		}
 
@@ -107,7 +107,7 @@ func unban(s *discordgo.Session, m *discordgo.MessageCreate) {
 			s.GuildBanDelete(m.GuildID, getIDFromMention(arg[1]))
 			successEmbed("Success", "User successfully unbanned.", s, m)
 		} else {
-			errEmbed("Syntax error", botPrefix+"unban [mention user]", s, m)
+			errEmbed("Syntax error", "`"+botPrefix+"unban [mention user]`", s, m)
 		}
 	} else {
 		errEmbed("Error", "You do not have permission to issue this command.", s, m)
@@ -125,7 +125,7 @@ func kick(s *discordgo.Session, m *discordgo.MessageCreate) {
 		arg := strings.Fields(m.Content)
 
 		if len(arg) < 2 {
-			errEmbed("Syntax error", botPrefix+"kick [mention user]", s, m)
+			errEmbed("Syntax error", "`"+botPrefix+"kick [mention user]`", s, m)
 			return
 		}
 
@@ -142,7 +142,7 @@ func kick(s *discordgo.Session, m *discordgo.MessageCreate) {
 			s.GuildMemberDelete(m.GuildID, getIDFromMention(arg[1]))
 			successEmbed("Success", "User successfully kicked.", s, m)
 		} else {
-			errEmbed("Syntax error", botPrefix+"unban [mention user]", s, m)
+			errEmbed("Syntax error", "`"+botPrefix+"kick [mention user]`", s, m)
 		}
 	} else {
 		errEmbed("Error", "You do not have permission to issue this command.", s, m)
@@ -194,7 +194,7 @@ func mute(s *discordgo.Session, m *discordgo.MessageCreate) {
 		arg := strings.Fields(m.Content)
 
 		if len(arg) < 2 {
-			errEmbed("Syntax error", "`"+botPrefix+"mute [mention user]", s, m)
+			errEmbed("Syntax error", "`"+botPrefix+"mute [mention user]`", s, m)
 			return
 		}
 
@@ -236,7 +236,7 @@ func unmute(s *discordgo.Session, m *discordgo.MessageCreate) {
 		arg := strings.Fields(m.Content)
 
 		if len(arg) < 2 {
-			errEmbed("Syntax error", "`"+botPrefix+"unmute [mention user]", s, m)
+			errEmbed("Syntax error", "`"+botPrefix+"unmute [mention user]`", s, m)
 			return
 		}
 
