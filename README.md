@@ -3,7 +3,7 @@
 [![made-with-Go](https://img.shields.io/badge/Made%20with-Go-1f425f.svg)](http://golang.org)
 [![GitHub license](https://img.shields.io/github/license/sixtusg/discordgo-bot)](https://github.com/sixtusg/discordgo-bot/blob/main/LICENSE)
 
-# sixtus-discord-bot
+# discordgo-bot
 Creating a Discord bot using Discord's API and the DiscordGo library for general use in guilds.
 
 ## Usage
